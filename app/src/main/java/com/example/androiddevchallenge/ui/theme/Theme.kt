@@ -20,40 +20,38 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
-    primary = purple200,
-    primaryVariant = purple700,
+    primary = amber200,
+    primaryVariant = amber700,
     secondary = teal200
 )
 
 private val LightColorPalette = lightColors(
-    primary = purple500,
-    primaryVariant = purple700,
-    secondary = teal200
-
-        /* Other default colors to override
-    background = Color.White,
+    primary = amber500,
+    primaryVariant = amber700,
+    secondary = teal200,
+    background = amber50,
     surface = Color.White,
     onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    onSecondary = blueGray900,
+    onBackground = blueGray900,
+    onSurface = blueGray900,
 )
 
 @Composable
-fun MyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
+fun LegoPuppyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+    val colors = //if (darkTheme) {
+      //  DarkColorPalette
+    //} else {
         LightColorPalette
-    }
+    //}
 
     MaterialTheme(
         colors = colors,
-        typography = typography,
-        shapes = shapes,
+        typography = LegoPuppyTypography,
+        shapes = LegoPuppyShapes,
         content = content
     )
 }
