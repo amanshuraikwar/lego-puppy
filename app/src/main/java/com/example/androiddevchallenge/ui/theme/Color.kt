@@ -27,3 +27,5 @@ val amber700 = Color(0xFFF57C00)
 val blueGray900 = Color(0xFF263238)
 val pink400 = Color(0xFFEC407A)
 val green400 = Color(0xFF66BB6A)
+
+val orange400 = Color(0xFFFF7043)

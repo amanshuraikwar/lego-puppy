@@ -16,52 +16,89 @@
 package com.example.androiddevchallenge
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowCompat
 import com.example.androiddevchallenge.model.Puppy
 import com.example.androiddevchallenge.ui.puppies.Puppies
+import com.example.androiddevchallenge.ui.puppydetail.PuppyDetail
 import com.example.androiddevchallenge.ui.theme.LegoPuppyTheme
+import com.example.androiddevchallenge.util.Navigator
+import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 
 class MainActivity : AppCompatActivity() {
+    @ExperimentalStdlibApi
+    @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Turn off the decor fitting system windows, which allows us to handle insets,
+        // including IME animations
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
-            LegoPuppyTheme {
-                MyApp()
-            }
+            MyApp(onBackPressedDispatcher)
         }
     }
 }
 
 // Start building your app here!
+@ExperimentalStdlibApi
+@ExperimentalFoundationApi
 @Composable
-fun MyApp() {
-    Surface(color = MaterialTheme.colors.background) {
-        Puppies(
-            puppyList = List(10) {
-                Puppy()
+fun MyApp(backDispatcher: OnBackPressedDispatcher) {
+    val navigator: Navigator<Destination> = rememberSaveable(
+        saver = Navigator.saver(backDispatcher)
+    ) {
+        Navigator(Destination.Puppies, backDispatcher)
+    }
+    val actions = remember(navigator) { Actions(navigator) }
+    val puppyList = remember {
+        List(100) {
+            Puppy()
+        }
+    }
+    ProvideWindowInsets(consumeWindowInsets = false) {
+        LegoPuppyTheme {
+            Crossfade(navigator.current) { destination ->
+                when (destination) {
+                    Destination.Puppies -> Puppies(
+                        puppyList = puppyList,
+                        onPuppyClicked = actions.selectPuppy
+                    )
+                    is Destination.PuppyDetail -> PuppyDetail(
+                        puppy = destination.puppy,
+                        upPress = actions.upPress
+                    )
+                }
             }
-        )
+        }
     }
 }
 
+@ExperimentalStdlibApi
+@ExperimentalFoundationApi
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun LightPreview() {
-    LegoPuppyTheme {
-        MyApp()
-    }
+//    LegoPuppyTheme {
+//        MyApp()
+//    }
 }
 
+@ExperimentalStdlibApi
+@ExperimentalFoundationApi
 @Preview("Dark Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun DarkPreview() {
-    LegoPuppyTheme(darkTheme = true) {
-        MyApp()
-    }
+//    LegoPuppyTheme(darkTheme = true) {
+//        MyApp()
+//    }
 }

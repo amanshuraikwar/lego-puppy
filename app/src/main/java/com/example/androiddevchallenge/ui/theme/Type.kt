@@ -23,30 +23,56 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.androiddevchallenge.R
 
-private val RobotoSlabFontFamily = FontFamily(
-    Font(R.font.plex_mono_regular),
-    Font(R.font.plex_mono_bold, FontWeight.Bold),
-    Font(R.font.plex_mono_medium, FontWeight.Medium)
+private val QuickSandFontFamily = FontFamily(
+    Font(R.font.quicksand_regular),
+    Font(R.font.quicksand_bold, FontWeight.Bold),
+    Font(R.font.quicksand_medium, FontWeight.Medium)
 )
 
 // Set of Material typography styles to start with
 val LegoPuppyTypography = Typography(
-    defaultFontFamily = RobotoSlabFontFamily,
+    defaultFontFamily = QuickSandFontFamily,
+    caption = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 12.sp,
+        letterSpacing = 0.4.sp
+    ),
+    body2 = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp,
+        letterSpacing = 0.25.sp
+    ),
+    h3 = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 48.sp,
+        letterSpacing = 0.sp
+    ),
+    subtitle1 = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        letterSpacing = 0.15.sp
+    ),
+    overline = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 10.sp,
+        letterSpacing = 1.5.sp,
+        fontFeatureSettings = "smcp",
+    )
 //    body1 = TextStyle(
 //        fontFamily = FontFamily.Default,
 //        fontWeight = FontWeight.Normal,
 //        fontSize = 16.sp
 //    )
-        /* Other default text styles to override
-    button = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.W500,
-        fontSize = 14.sp
-    ),
-    caption = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
-    )
-    */
+    /* Other default text styles to override
+button = TextStyle(
+    fontFamily = FontFamily.Default,
+    fontWeight = FontWeight.W500,
+    fontSize = 14.sp
+),
+caption = TextStyle(
+    fontFamily = FontFamily.Default,
+    fontWeight = FontWeight.Normal,
+    fontSize = 12.sp
+)
+*/
 )
