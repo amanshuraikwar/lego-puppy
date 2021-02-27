@@ -25,7 +25,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.core.view.WindowCompat
-import com.example.androiddevchallenge.model.Puppy
 import com.example.androiddevchallenge.ui.puppies.Puppies
 import com.example.androiddevchallenge.ui.puppydetail.PuppyDetail
 import com.example.androiddevchallenge.ui.theme.LegoPuppyTheme
