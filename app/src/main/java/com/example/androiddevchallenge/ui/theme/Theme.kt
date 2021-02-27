@@ -25,7 +25,13 @@ import androidx.compose.ui.graphics.Color
 private val DarkColorPalette = darkColors(
     primary = amber200,
     primaryVariant = amber700,
-    secondary = teal200
+    secondary = teal200,
+    background = gray900,
+    surface = gray900,
+    onPrimary = blueGray900,
+    onSecondary = blueGray900,
+    onBackground = amber50,
+    onSurface = amber50,
 )
 
 private val LightColorPalette = lightColors(
@@ -42,11 +48,11 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun LegoPuppyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
-    val colors = //if (darkTheme) {
-      //  DarkColorPalette
-    //} else {
+    val colors = if (darkTheme) {
+        DarkColorPalette
+    } else {
         LightColorPalette
-    //}
+    }
 
     MaterialTheme(
         colors = colors,

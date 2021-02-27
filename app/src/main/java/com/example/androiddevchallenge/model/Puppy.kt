@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.model
 
 import android.os.Parcelable
@@ -8,14 +23,16 @@ import kotlinx.parcelize.Parcelize
 data class Puppy(
     val name: String,
     val breed: String,
-    val imageUrl: String,
+    val puppyPhotoUrlList: List<String>,
     @IntRange(from = 1, to = 30) val age: Int,
     val gender: Gender,
-    val kmsAway: Int
+    val kmsAway: Int,
+    val location: String,
+    val bio: String
 ) : Parcelable {
 
     enum class Gender {
-        Male, Female
+        Boi, Gurl
     }
 
     companion object {
@@ -34,10 +51,21 @@ data class Puppy(
         operator fun invoke() = Puppy(
             name = "Mr. Peabody",
             breed = "Golder Retriever",
-            imageUrl = imageList.random(),
+            puppyPhotoUrlList = listOf(
+                imageList.random(),
+                imageList.random(),
+                imageList.random(),
+                imageList.random()
+            ),
             age = 3,
-            gender = Gender.Male,
-            kmsAway = 4
+            gender = Gender.Boi,
+            kmsAway = 4,
+            location = "Bay Area, San Francisco",
+            bio = "Foxtrot is a 6-year-old, house trained, " +
+                "male Mix Breed that is super friendly. " +
+                "Loves people, other dogs, even cats. " +
+                "He loves playing with his dog toys and going on walks. " +
+                "He loves to be with his people, and explore!"
         )
     }
 }

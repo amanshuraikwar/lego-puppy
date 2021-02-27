@@ -13,22 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui.puppyheader
+package com.example.androiddevchallenge.ui.puppydetail
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import java.util.Locale
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.androiddevchallenge.model.Puppy
+import com.example.androiddevchallenge.util.PreviewSurface
 
-@ExperimentalStdlibApi
 @Composable
-fun PuppyHeader(modifier: Modifier = Modifier, heading: String) {
+fun PuppyBio(modifier: Modifier = Modifier, bio: String) {
     Text(
-        text = heading.uppercase(Locale.getDefault()),
-        modifier = modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp),
-        style = MaterialTheme.typography.caption
+        text = bio,
+        modifier = modifier,
+        style = MaterialTheme.typography.body1
     )
+}
+
+@Preview
+@Composable
+fun PuppyBioPreview() {
+    PreviewSurface {
+        PuppyBio(
+            bio = Puppy().bio
+        )
+    }
+}
+
+@Preview
+@Composable
+fun PuppyBioPreviewDark() {
+    PreviewSurface(darkTheme = true) {
+        PuppyBio(
+            bio = Puppy().bio
+        )
+    }
 }
