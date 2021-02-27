@@ -12,13 +12,13 @@ import androidx.compose.material.icons.rounded.Pets
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.model.Puppy
 import com.example.androiddevchallenge.ui.theme.LegoPuppyTheme
-import com.example.androiddevchallenge.ui.theme.orange400
-import com.example.androiddevchallenge.ui.theme.pink400
+import com.example.androiddevchallenge.util.PreviewSurface
+import com.example.androiddevchallenge.util.breed
+import com.example.androiddevchallenge.util.gender
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
 
@@ -71,7 +71,7 @@ fun PuppyDetail(
                             PuppyProp(
                                 imageVector = Icons.Rounded.Pets,
                                 propName = puppy.breed,
-                                iconTint = orange400
+                                iconTint = MaterialTheme.colors.breed
                             )
                         }
 
@@ -86,7 +86,7 @@ fun PuppyDetail(
                                     Puppy.Gender.Gurl -> Icons.Rounded.Female
                                 },
                                 propName = "${puppy.gender}, ${puppy.age} years old",
-                                iconTint = pink400
+                                iconTint = MaterialTheme.colors.gender
                             )
                         }
                     }
@@ -147,9 +147,16 @@ fun PuppyDetail(
 @Preview
 @Composable
 fun PuppyDetailPreview() {
-    LegoPuppyTheme {
-        Surface(color = MaterialTheme.colors.background) {
-            PuppyDetail(Modifier.fillMaxHeight(), Puppy())
-        }
+    PreviewSurface {
+        PuppyDetail(Modifier.fillMaxHeight(), Puppy())
+    }
+}
+
+@ExperimentalStdlibApi
+@Preview
+@Composable
+fun PuppyDetailPreviewDark() {
+    PreviewSurface(darkTheme = true) {
+        PuppyDetail(Modifier.fillMaxHeight(), Puppy())
     }
 }

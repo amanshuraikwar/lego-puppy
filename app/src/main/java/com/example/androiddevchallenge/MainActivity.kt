@@ -24,7 +24,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import com.example.androiddevchallenge.model.Puppy
 import com.example.androiddevchallenge.ui.puppies.Puppies
@@ -59,18 +58,14 @@ fun MyApp(backDispatcher: OnBackPressedDispatcher) {
     ) {
         Navigator(Destination.Puppies, backDispatcher)
     }
+
     val actions = remember(navigator) { Actions(navigator) }
-    val puppyList = remember {
-        List(100) {
-            Puppy()
-        }
-    }
+
     ProvideWindowInsets(consumeWindowInsets = false) {
         LegoPuppyTheme {
             Crossfade(navigator.current) { destination ->
                 when (destination) {
                     Destination.Puppies -> Puppies(
-                        puppyList = puppyList,
                         onPuppyClicked = actions.selectPuppy
                     )
                     is Destination.PuppyDetail -> PuppyDetail(
@@ -81,24 +76,4 @@ fun MyApp(backDispatcher: OnBackPressedDispatcher) {
             }
         }
     }
-}
-
-@ExperimentalStdlibApi
-@ExperimentalFoundationApi
-@Preview("Light Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun LightPreview() {
-//    LegoPuppyTheme {
-//        MyApp()
-//    }
-}
-
-@ExperimentalStdlibApi
-@ExperimentalFoundationApi
-@Preview("Dark Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun DarkPreview() {
-//    LegoPuppyTheme(darkTheme = true) {
-//        MyApp()
-//    }
 }

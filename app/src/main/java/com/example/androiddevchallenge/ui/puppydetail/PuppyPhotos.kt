@@ -15,7 +15,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.androiddevchallenge.model.Puppy
+import com.example.androiddevchallenge.util.PreviewSurface
+import com.example.androiddevchallenge.util.photoSelected
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
@@ -24,6 +28,7 @@ fun PuppyPhotos(
     photoList: List<String>
 ) {
     var selectedImageIndex by remember { mutableStateOf(0) }
+
     Box(
         modifier,
         contentAlignment = Alignment.BottomStart
@@ -66,7 +71,7 @@ fun PuppyPhotos(
                             .size(72.dp)
                             .border(
                                 width = 4.dp,
-                                MaterialTheme.colors.background,
+                                color = MaterialTheme.colors.photoSelected,
                                 shape = RoundedCornerShape(28)
                             )
                             .clip(MaterialTheme.shapes.medium)
@@ -79,5 +84,23 @@ fun PuppyPhotos(
                 )
             }
         }
+    }
+}
+
+@ExperimentalStdlibApi
+@Preview
+@Composable
+fun PuppyPhotosPreview() {
+    PreviewSurface {
+        PuppyPhotos(Modifier.fillMaxWidth(), photoList = Puppy().puppyPhotoUrlList)
+    }
+}
+
+@ExperimentalStdlibApi
+@Preview
+@Composable
+fun PuppyPhotosPreviewDark() {
+    PreviewSurface(darkTheme = true) {
+        PuppyPhotos(Modifier.fillMaxWidth(), photoList = Puppy().puppyPhotoUrlList)
     }
 }

@@ -12,9 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.androiddevchallenge.onSurfaceSecondary
-import com.example.androiddevchallenge.ui.theme.green400
+import com.example.androiddevchallenge.model.Puppy
+import com.example.androiddevchallenge.util.PreviewSurface
+import com.example.androiddevchallenge.util.location
+import com.example.androiddevchallenge.util.onSurfaceSecondary
 
 @Composable
 fun PuppyLocation(modifier: Modifier = Modifier, location: String) {
@@ -25,7 +28,7 @@ fun PuppyLocation(modifier: Modifier = Modifier, location: String) {
         Icon(
             imageVector = Icons.Rounded.LocationOn,
             contentDescription = null,
-            tint = green400,
+            tint = MaterialTheme.colors.location,
             modifier = Modifier.size(20.dp)
         )
         Text(
@@ -34,5 +37,23 @@ fun PuppyLocation(modifier: Modifier = Modifier, location: String) {
             style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.Medium),
             color = MaterialTheme.colors.onSurfaceSecondary,
         )
+    }
+}
+
+@ExperimentalStdlibApi
+@Preview
+@Composable
+fun PuppyLocationPreview() {
+    PreviewSurface {
+        PuppyLocation(location = Puppy().location)
+    }
+}
+
+@ExperimentalStdlibApi
+@Preview
+@Composable
+fun PuppyLocationPreviewDark() {
+    PreviewSurface(darkTheme = true) {
+        PuppyLocation(location = Puppy().location)
     }
 }
