@@ -15,9 +15,13 @@
  */
 package com.example.androiddevchallenge.ui.puppydetail
 
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.SpringSpec
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -36,8 +40,14 @@ import androidx.compose.material.icons.rounded.Female
 import androidx.compose.material.icons.rounded.Male
 import androidx.compose.material.icons.rounded.Pets
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.model.Puppy
@@ -46,6 +56,8 @@ import com.example.androiddevchallenge.util.breed
 import com.example.androiddevchallenge.util.gender
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @ExperimentalStdlibApi
 @Composable
@@ -54,6 +66,8 @@ fun PuppyDetail(
     puppy: Puppy,
     upPress: () -> Unit = {}
 ) {
+    val scope = rememberCoroutineScope()
+
     Surface(
         color = MaterialTheme.colors.background,
         modifier = Modifier.fillMaxHeight()
@@ -68,29 +82,60 @@ fun PuppyDetail(
                 }
 
                 item {
+                    var visible by remember { mutableStateOf(false) }
+                    val progress by animateFloatAsState(if (visible) 1f else 0f)
+
+                    scope.launch {
+                        delay(300)
+                        visible = true
+                    }
+
                     Text(
                         text = puppy.name,
                         style = MaterialTheme.typography.h3,
                         modifier = Modifier
                             .fillMaxWidth()
+                            .alpha(progress)
+                            // .absoluteOffset(y = (16 * (1f - progress)).dp)
                             .padding(top = 16.dp, start = 16.dp, end = 16.dp),
+
                         color = MaterialTheme.colors.onSurface
                     )
                 }
 
                 item {
+                    var visible by remember { mutableStateOf(false) }
+                    val progress by animateFloatAsState(if (visible) 1f else 0f)
+
+                    scope.launch {
+                        delay(400)
+                        visible = true
+                    }
+
                     PuppyLocation(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .alpha(progress)
+                            // .absoluteOffset(y = (16 * (1f - progress)).dp)
                             .padding(top = 16.dp, start = 16.dp, end = 16.dp),
                         location = "${puppy.location} (${puppy.kmsAway} kms away)"
                     )
                 }
 
                 item {
+                    var visible by remember { mutableStateOf(false) }
+                    val progress by animateFloatAsState(if (visible) 1f else 0f)
+
+                    scope.launch {
+                        delay(500)
+                        visible = true
+                    }
+
                     LazyRow(
                         contentPadding = PaddingValues(16.dp),
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .alpha(progress)
                     ) {
                         item {
                             PuppyProp(
@@ -118,9 +163,18 @@ fun PuppyDetail(
                 }
 
                 item {
+                    var visible by remember { mutableStateOf(false) }
+                    val progress by animateFloatAsState(if (visible) 1f else 0f)
+
+                    scope.launch {
+                        delay(600)
+                        visible = true
+                    }
+
                     PuppyBio(
                         Modifier
                             .fillMaxWidth()
+                            .alpha(progress)
                             .padding(top = 8.dp, start = 16.dp, end = 16.dp),
                         bio = puppy.bio,
                     )
@@ -151,11 +205,27 @@ fun PuppyDetail(
                     .fillMaxWidth()
                     .navigationBarsPadding()
             ) {
+                var visible by remember { mutableStateOf(false) }
+                val progress by animateFloatAsState(
+                    if (visible) 1f else 0f,
+                    animationSpec = SpringSpec(
+                        dampingRatio = Spring.DampingRatioMediumBouncy,
+                        stiffness = Spring.StiffnessLow
+                    )
+                )
+
+                scope.launch {
+                    delay(800)
+                    visible = true
+                }
+
                 Button(
                     onClick = { /*TODO*/ },
                     Modifier
+                        .alpha(progress)
+                        .absoluteOffset(y = (40 * (1 - progress)).dp)
                         .fillMaxWidth()
-                        .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                        .padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 32.dp)
                 ) {
                     Text(
                         "Adopt Me".uppercase(),

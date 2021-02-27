@@ -15,6 +15,7 @@
  */
 package com.example.androiddevchallenge.ui.puppydetail
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -32,9 +33,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -45,12 +48,15 @@ import com.example.androiddevchallenge.model.Puppy
 import com.example.androiddevchallenge.util.PreviewSurface
 import com.example.androiddevchallenge.util.photoSelected
 import dev.chrisbanes.accompanist.coil.CoilImage
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun PuppyPhotos(
     modifier: Modifier = Modifier,
     photoList: List<String>
 ) {
+    val scope = rememberCoroutineScope()
     var selectedImageIndex by remember { mutableStateOf(0) }
 
     Box(
@@ -85,6 +91,15 @@ fun PuppyPhotos(
                 if (index > 0) {
                     Spacer(modifier = Modifier.size(16.dp))
                 }
+
+                var visible by remember { mutableStateOf(false) }
+                val progress by animateFloatAsState(if (visible) 1f else 0f)
+
+                scope.launch {
+                    delay(index * 200L)
+                    visible = true
+                }
+
                 CoilImage(
                     data = item,
                     contentDescription = null,
@@ -92,6 +107,7 @@ fun PuppyPhotos(
                     contentScale = ContentScale.Crop,
                     modifier = if (index == selectedImageIndex) {
                         Modifier
+                            .alpha(progress)
                             .size(72.dp)
                             .border(
                                 width = 4.dp,
@@ -101,6 +117,8 @@ fun PuppyPhotos(
                             .clip(MaterialTheme.shapes.medium)
                     } else {
                         Modifier
+                            .alpha(progress)
+                            // .absoluteOffset(x = (4 * (1-progress)).dp)
                             .size(72.dp)
                             .clip(MaterialTheme.shapes.medium)
                             .clickable(onClick = { selectedImageIndex = index })
