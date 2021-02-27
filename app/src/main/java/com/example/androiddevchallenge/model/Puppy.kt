@@ -116,10 +116,10 @@ data class Puppy(
                 kmsAway = (0..10).random(),
                 location = "Toa Payoh",
                 bio = "$name is a $age year old house trained " +
-                        "$gender. $pronoun is super friendly. " +
-                        "$pronoun loves people, other dogs, even cats. " +
-                        "$pronoun loves playing with toys and going on walks. " +
-                        "$pronoun loves to explore!"
+                    "$gender. $pronoun is super friendly. " +
+                    "$pronoun loves people, other dogs, even cats. " +
+                    "$pronoun loves playing with toys and going on walks. " +
+                    "$pronoun loves to explore!"
             )
         }
     }
