@@ -15,8 +15,10 @@
  */
 package com.example.androiddevchallenge.ui.puppies
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,10 +26,15 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.model.Puppy
 import com.example.androiddevchallenge.ui.actionbar.PuppyActionBar
 import com.example.androiddevchallenge.util.PreviewSurface
@@ -61,10 +68,31 @@ fun Puppies(
             contentPadding = LocalWindowInsets.current.systemBars.toPaddingValues()
         ) {
             item {
-                PuppyActionBar(Modifier.fillMaxWidth())
+                var visible by remember { mutableStateOf(false) }
+                val progress by animateFloatAsState(if (visible) 1f else 0f)
+
+                scope.launch {
+                    delay(300)
+                    visible = true
+                }
+
+                PuppyActionBar(
+                    Modifier
+                        .fillMaxWidth()
+                        .alpha(progress)
+                        .absoluteOffset(x = (-40 * (1f - progress)).dp)
+                )
             }
 
             items(puppyList) { item ->
+                var visible by remember { mutableStateOf(false) }
+                val alpha by animateFloatAsState(if (visible) 1f else 0f)
+
+                scope.launch {
+                    delay(300)
+                    visible = true
+                }
+
                 PuppyItem(
                     Modifier
                         .clickable(
@@ -72,13 +100,14 @@ fun Puppies(
                                 scope.launch {
                                     if (lock.isLocked) return@launch
                                     lock.withLock {
-                                        delay(300)
+                                        delay(100)
                                         onPuppyClicked(item)
                                     }
                                 }
                             }
                         )
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .alpha(alpha),
                     puppy = item
                 )
             }
