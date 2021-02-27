@@ -57,7 +57,12 @@ val LegoPuppyTypography = Typography(
         fontSize = 10.sp,
         letterSpacing = 1.5.sp,
         fontFeatureSettings = "smcp",
-    )
+    ),
+    button = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize = 16.sp,
+        letterSpacing = 1.25.sp
+    ),
 //    body1 = TextStyle(
 //        fontFamily = FontFamily.Default,
 //        fontWeight = FontWeight.Normal,

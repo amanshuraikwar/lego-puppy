@@ -9,12 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.LinearGradient
-import androidx.compose.ui.graphics.LinearGradientShader
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -31,7 +27,7 @@ fun PuppyItemHorizontal(modifier: Modifier = Modifier, puppy: Puppy) {
             contentAlignment = Alignment.BottomStart
         ) {
             CoilImage(
-                data = puppy.imageUrl,
+                data = puppy.puppyPhotoUrlList[0],
                 contentDescription = null,
                 fadeIn = true,
                 contentScale = ContentScale.Crop,

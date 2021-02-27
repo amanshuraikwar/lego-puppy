@@ -8,14 +8,16 @@ import kotlinx.parcelize.Parcelize
 data class Puppy(
     val name: String,
     val breed: String,
-    val imageUrl: String,
+    val puppyPhotoUrlList: List<String>,
     @IntRange(from = 1, to = 30) val age: Int,
     val gender: Gender,
-    val kmsAway: Int
+    val kmsAway: Int,
+    val location: String,
+    val bio: String
 ) : Parcelable {
 
     enum class Gender {
-        Male, Female
+        Boi, Gurl
     }
 
     companion object {
@@ -34,10 +36,21 @@ data class Puppy(
         operator fun invoke() = Puppy(
             name = "Mr. Peabody",
             breed = "Golder Retriever",
-            imageUrl = imageList.random(),
+            puppyPhotoUrlList = listOf(
+                imageList.random(),
+                imageList.random(),
+                imageList.random(),
+                imageList.random()
+            ),
             age = 3,
-            gender = Gender.Male,
-            kmsAway = 4
+            gender = Gender.Boi,
+            kmsAway = 4,
+            location = "Bay Area, San Francisco",
+            bio = "Foxtrot is a 6-year-old, house trained, " +
+                    "male Mix Breed that is super friendly. " +
+                    "Loves people, other dogs, even cats. " +
+                    "He loves playing with his dog toys and going on walks. " +
+                    "He loves to be with his people, and explore!"
         )
     }
 }

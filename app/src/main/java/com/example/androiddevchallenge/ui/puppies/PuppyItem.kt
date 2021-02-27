@@ -1,7 +1,6 @@
 package com.example.androiddevchallenge.ui.puppies
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -10,13 +9,12 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Female
 import androidx.compose.material.icons.rounded.Male
-import androidx.compose.material.icons.rounded.NearMe
+import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.Pets
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +34,7 @@ fun PuppyItem(modifier: Modifier = Modifier, puppy: Puppy) {
         verticalAlignment = Alignment.Top
     ) {
         CoilImage(
-            data = puppy.imageUrl,
+            data = puppy.puppyPhotoUrlList[0],
             contentDescription = null,
             fadeIn = true,
             contentScale = ContentScale.Crop,
@@ -84,8 +82,8 @@ fun PuppyItem(modifier: Modifier = Modifier, puppy: Puppy) {
             ) {
                 Icon(
                     imageVector = when (puppy.gender) {
-                        Puppy.Gender.Male -> Icons.Rounded.Male
-                        Puppy.Gender.Female -> Icons.Rounded.Female
+                        Puppy.Gender.Boi -> Icons.Rounded.Male
+                        Puppy.Gender.Gurl -> Icons.Rounded.Female
                     },
                     contentDescription = null,
                     modifier = Modifier.size(14.dp),
@@ -107,7 +105,7 @@ fun PuppyItem(modifier: Modifier = Modifier, puppy: Puppy) {
                 modifier = Modifier.padding(top = 4.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.NearMe,
+                    imageVector = Icons.Rounded.LocationOn,
                     contentDescription = null,
                     modifier = Modifier.size(14.dp),
                     tint = green400
