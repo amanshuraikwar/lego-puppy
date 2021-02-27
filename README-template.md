@@ -1,22 +1,25 @@
-# Put title of your app here
+# Lego Puppy
 
 <!--- Replace <OWNER> with your Github Username and <REPOSITORY> with the name of your repository. -->
 <!--- You can find both of these in the url bar when you open your repository in github. -->
-![Workflow result](https://github.com/<OWNER>/<REPOSITORY>/workflows/Check/badge.svg)
+![Workflow result](https://github.com/amanshuraikwar/lego-puppy/workflows/Check/badge.svg)
 
 
 ## :scroll: Description
-<!--- Describe your app in one or two sentences -->
+* Lego Puppy allows you to see puppies up for adoption nearby. 
+* You can see their breed, gender and age.
 
 
 ## :bulb: Motivation and Context
-<!--- Optionally point readers to interesting parts of your submission. -->
-<!--- What are you especially proud of? -->
+* Lego Puppy supports both Light and Dark themes.
+* The user experience is smooth, thanks to all the animations implemented using Jetpack Compose Animation Apis.
 
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->
-<img src="/results/screenshot_1.png" width="260">&emsp;<img src="/results/screenshot_2.png" width="260">
+<img src="/results/screenshot_1.png" width="260">&emsp;<img src="/results/screenshot_2.png" width="260">&emsp;<img src="/results/screenshot_3.png" width="260">&emsp;<img src="/results/screenshot_4.png" width="260">
+
+<img src="/results/video.gif" width="260">&emsp;<img src="/results/video_dark.gif" width="260">
 
 ## License
 ```

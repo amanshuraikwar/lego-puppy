@@ -94,7 +94,7 @@ data class Puppy(
         )
 
         operator fun invoke(): Puppy {
-            val index = (0..3).random()
+            val index = (0..4).random()
             val name = dogNames.random()
             val age = (1..10).random()
             val gender = if ((0..1).random() == 0) {
